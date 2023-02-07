@@ -11,6 +11,7 @@ const renderPost=(posts)=>{
         <div  class="card-body" data-id=${element._id}>
             <h5 class="card-title">${element.title}</h5>
             <p class="card-text">${element.desc}</p>
+            <p class="card-text">${element.image}</p>
             <a href="#" class="card-link" id="edit">Edit</a>
             <a href="#" class="card-link" id="delete">delete</a>
       </div>
@@ -18,7 +19,8 @@ const renderPost=(posts)=>{
     });
     postlists.innerHTML=output
 }
-const url='http://localhost:3000/api/posts';
+const url='https://brand-acqz.onrender.com/api/posts/all';
+const urls='https://brand-acqz.onrender.com/api/posts';
 postlists.addEventListener('click',(e)=>{
   e.preventDefault();
   let delButton=e.target.id == "delete"
@@ -29,7 +31,7 @@ postlists.addEventListener('click',(e)=>{
 
   if(delButton){
     console.log(id)
-    fetch(`${url}/delete/${id}`,{
+    fetch(`${urls}/delete/${id}`,{
       method:'DELETE'
     })
     .then(res=>res.json())
@@ -44,7 +46,7 @@ postlists.addEventListener('click',(e)=>{
   }
   btn.addEventListener('click',(e)=>{
     e.preventDefault()
-    fetch(`${url}/update/${id}`,{
+    fetch(`${urls}/update/${id}`,{
       method:'PUT',
       headers:{
         'Content-Type':'application/json'
@@ -67,7 +69,7 @@ fetch(url)
 })
 addPost.addEventListener('submit',(e)=>{
   e.preventDefault()
-  fetch(url,{
+  fetch(urls,{
     method:'POST',
     headers:{
       'Content-Type':'application/json'
